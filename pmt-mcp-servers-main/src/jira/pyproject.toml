@@ -1,0 +1,12 @@
+[project]
+name = "jira"
+version = "0.2.0"
+description = "A server implementation for Jira MCP integration."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "atlassian-python-api>=4.0.7",
+    "fastmcp>=2.12.4",
+    "httpx>=0.28.1",
+    "validators>=0.35.0",
+]

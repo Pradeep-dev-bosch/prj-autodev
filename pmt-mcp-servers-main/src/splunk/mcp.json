@@ -1,0 +1,82 @@
+{
+  "servers": {
+    "splunk-python-mcp-server": {
+      "command": "uv",
+      "cwd": "/path/to/splunk-mcp-server",
+      "args": [
+        "run",
+        "--python",
+        "3.11",
+        "mcp-splunk"
+      ],
+      "env": {
+        "SPLUNK_HOST": "${input:splunk-host}",
+        "SPLUNK_PORT": "${input:splunk-port}",
+        "SPLUNK_USERNAME": "${input:splunk-username}",
+        "SPLUNK_PASSWORD": "${input:splunk-password}",
+        "SPLUNK_VERIFY_SSL": "true",
+        "TRANSPORT": "stdio"
+      }
+    },
+    "splunk-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network=host",
+        "-v",
+        "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro",
+        "-e",
+        "SPLUNK_HOST",
+        "-e",
+        "SPLUNK_PORT",
+        "-e",
+        "SPLUNK_USERNAME",
+        "-e",
+        "SPLUNK_PASSWORD",
+        "-e",
+        "SPLUNK_VERIFY_SSL",
+        "-e",
+        "TRANSPORT",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/splunk-mcp-server:0.1.0"
+      ],
+      "env": {
+        "SPLUNK_HOST": "${input:splunk-host}",
+        "SPLUNK_PORT": "${input:splunk-port}",
+        "SPLUNK_USERNAME": "${input:splunk-username}",
+        "SPLUNK_PASSWORD": "${input:splunk-password}",
+        "SPLUNK_VERIFY_SSL": "true",
+        "TRANSPORT": "stdio"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "splunk-host",
+      "description": "Splunk Host (IP or hostname without protocol)",
+      "default": "127.0.0.1"
+    },
+    {
+      "type": "promptString",
+      "id": "splunk-port",
+      "description": "Splunk Management Port",
+      "default": "8089"
+    },
+    {
+      "type": "promptString",
+      "id": "splunk-username",
+      "description": "Splunk Username",
+      "default": "admin"
+    },
+    {
+      "type": "promptString",
+      "id": "splunk-password",
+      "description": "Splunk Password",
+      "password": true
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=60", "wheel>=0.37"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qac-mcp-server"
+version = "0.0.0"  # Initial beta/development release
+description = "MCP server implementation for Perforce QAC"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "Proprietary"}
+authors = [
+    {name = "pmt-mcpaw-team", email = "pmt-mcpaw-team@bosch.com"}
+]
+
+dependencies = [
+    "fastmcp",
+    "pydantic",
+    "pydantic-settings",
+    "rb-gitlib",
+    "artifactorylib",
+    "path_operations",
+]
+
+[tool.uv]
+# Primary PyPI index used by uv
+index-url = "https://pypi.org/simple"
+index-strategy = "unsafe-best-match"
+
+# Additional/private indexes to search for packages (Artifactory endpoints)
+extra-index-url = [
+	"https://artifactory.boschdevcloud.com/artifactory/api/pypi/pmt-mcp-servers-pypi-local/simple",
+    "https://rb-artifactory.bosch.com/artifactory/api/pypi/pypi-local/simple",
+    "https://rb-artifactory.bosch.com/artifactory/api/pypi/tcc-pypi-local/simple",
+    "https://artifactory-02.boschdevcloud.com/artifactory/api/pypi/sofa-pypi-local/simple",
+    "https://rb-artifactory.bosch.com/artifactory/api/pypi/odc-poe-pypi-snapshot-local/simple",
+    "https://artifactory.boschdevcloud.com/artifactory/api/pypi/od-pypi-virtual/simple",
+]
+
+[project.scripts]
+qac-mcp = "qacmcpserver:main"

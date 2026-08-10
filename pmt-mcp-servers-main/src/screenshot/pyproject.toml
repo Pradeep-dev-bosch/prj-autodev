@@ -1,0 +1,8 @@
+[project]
+name = "mcp-screenshot"
+version = "0.1.0"
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "fastmcp",
+    "Pillow>=10.0.0",
+]

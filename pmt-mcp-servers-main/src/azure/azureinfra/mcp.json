@@ -1,0 +1,39 @@
+{
+  "servers": {
+    "azure-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--env-file",
+        "src/azureinfra/.env",
+        "-e",
+        "AZURE_CLIENT_SECRET=${input:AZURE_CLIENT_SECRET}",
+        "-e",
+        "AZURE_MCP_COLLECT_TELEMETRY=${input:AZURE_MCP_COLLECT_TELEMETRY}",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/azure-mcp-server:0.0.0"
+      ],
+      "env": {
+        "AZURE_CLIENT_SECRET": "${input:AZURE_CLIENT_SECRET}",
+        "AZURE_MCP_COLLECT_TELEMETRY": "${input:AZURE_MCP_COLLECT_TELEMETRY}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "AZURE_CLIENT_SECRET",
+      "description": "Azure client secret",
+      "password": true
+    },
+    {
+      "type": "pickString",
+      "options": ["true", "false"],
+      "default": "false",
+      "id": "AZURE_MCP_COLLECT_TELEMETRY",
+      "description": "Azure MCP collect telemetry",
+      "password": false
+    }
+  ]
+}

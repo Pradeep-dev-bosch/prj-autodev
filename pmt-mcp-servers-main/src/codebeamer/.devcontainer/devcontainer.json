@@ -1,0 +1,37 @@
+{
+    "name": "Codebeamer MCP Server",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/app",
+    "initializeCommand": "docker rm -f cx-container dev-container 2>/dev/null || true",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.black-formatter",
+                "github.copilot"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/app/.venv/bin/python",
+                "python.terminal.activateEnvironment": false,
+                "chat.mcp.autostart": "newAndOutdated",
+                "chat.mcp.servers": {
+                    "codebeamer-min": {
+                        "command": "uv",
+                        "args": [
+                            "--directory",
+                            "/workspaces/pmt-mcp-servers/src/codebeamer",
+                            "run",
+                            "codebeamer_server.py"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "remoteUser": "root",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.env,target=/app/.env,type=bind"
+    ],
+    "remoteEnv": {}
+}

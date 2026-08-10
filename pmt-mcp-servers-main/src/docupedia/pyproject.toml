@@ -1,0 +1,11 @@
+[project]
+name = "docupedia"
+version = "0.1.0"
+description = "Docupedia MCP server for accessing Bosch Confluence (Docupedia) content with search, page retrieval, and content extraction capabilities"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.12.4",
+    "httpx>=0.28.1",
+    "requests>=2.32.5",
+]

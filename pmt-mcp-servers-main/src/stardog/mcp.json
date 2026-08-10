@@ -1,0 +1,58 @@
+{
+	"servers": {
+		"stardog-python-mcp-server": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"stardogmcpserver.py"
+			],
+			"cwd": "/path/to/repository/pmt-mcp-servers/src/stardog",
+			"env": {
+				"STARDOG_USERNAME": "<STARDOG_USERNAME>",
+				"STARDOG_PASSWORD": "${input:STARDOG_PASSWORD}",
+				"STARDOG_ENDPOINT": "<STARDOG_ENDPOINT>",
+				"STARDOG_DATABASE": "<STARDOG_DATABASE>",
+				"HTTP_PROXY": "<HTTP_PROXY>",
+				"HTTPS_PROXY": "<HTTPS_PROXY>",
+				"http_proxy": "<HTTP_PROXY>",
+				"https_proxy": "<HTTPS_PROXY>"
+			}
+		},
+		"stardog-docker-mcp-server": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"STARDOG_USERNAME",
+				"-e",
+				"STARDOG_PASSWORD",
+				"-e",
+				"STARDOG_ENDPOINT",
+				"-e",
+				"STARDOG_DATABASE",
+				"artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/stardog-mcp-server:latest"
+			],
+			"env": {
+				"STARDOG_USERNAME": "<STARDOG_USERNAME>",
+				"STARDOG_PASSWORD": "${input:STARDOG_PASSWORD}",
+				"STARDOG_ENDPOINT": "<STARDOG_ENDPOINT>",
+				"STARDOG_DATABASE": "<STARDOG_DATABASE>",
+				"HTTP_PROXY": "<HTTP_PROXY>",
+				"HTTPS_PROXY": "<HTTPS_PROXY>",
+				"http_proxy": "<HTTP_PROXY>",
+				"https_proxy": "<HTTPS_PROXY>"
+			}
+		}
+	},
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "STARDOG_PASSWORD",
+			"description": "Stardog password",
+			"password": true
+		}
+	]
+}

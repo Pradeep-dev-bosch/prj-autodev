@@ -1,0 +1,10 @@
+[project]
+name = "canoe-mcp-server"
+version = "0.1.0"
+description = "MCP server for Vector CANoe application"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.13.2",
+    "requests>=2.32.5"
+]

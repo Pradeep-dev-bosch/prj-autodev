@@ -1,0 +1,21 @@
+[project]
+name = "mcp-splunk"
+version = "0.1.0"
+description = "Splunk MCP server for executing searches, retrieving events, and managing Splunk resources with security guardrails"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.12.4",
+    "httpx>=0.28.1",
+    "requests>=2.32.5",
+]
+
+[project.scripts]
+mcp-splunk = "splunkmcpserver:run"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["splunkmcpserver", "helpers", "splunk_client", "guardrails", "spl_risk_rules"]

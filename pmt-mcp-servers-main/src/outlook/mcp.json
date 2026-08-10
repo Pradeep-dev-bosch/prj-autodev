@@ -1,0 +1,89 @@
+{
+  "servers": {
+    "outlook-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform", "linux/amd64",
+        "-p", "8080:8080",
+        "-e", "AZURE_CLIENT_ID",
+        "-e", "AZURE_TENANT_ID",
+        "-e", "AZURE_CLIENT_SECRET",
+        "-e", "OAUTH_REDIRECT_PORT",
+        "-e", "TRANSPORT",
+        "-e", "HOST",
+        "-e", "HOST_PORT",
+        "-e", "HTTP_PROXY=",
+        "-e", "HTTPS_PROXY=",
+        "-e", "http_proxy=",
+        "-e", "https_proxy=",
+        "-e", "NO_PROXY=*",
+        "-e", "no_proxy=*",
+        "-v", "~/..:/home",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/outlook-mcp-server:0.0.0"
+      ],
+      "env": {
+        "AZURE_CLIENT_ID": "${input:azure-client-id}",
+        "AZURE_TENANT_ID": "${input:azure-tenant-id}",
+        "AZURE_CLIENT_SECRET": "${input:azure-client-secret}",
+        "OAUTH_REDIRECT_PORT": "${input:oauth-redirect-port}",
+        "HTTP_PROXY": "",
+        "HTTPS_PROXY": "",
+        "http_proxy": "",
+        "https_proxy": "",
+        "NO_PROXY": "*",
+        "no_proxy": "*",
+        "TRANSPORT": "<TRANSPORT>",
+        "HOST": "<HOST>",
+        "HOST_PORT": "<HOST_PORT>"
+      }
+    },
+    "outlook-python-mcp-server": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "outlookmcpserver.py"
+      ],
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/outlook",
+      "env": {
+        "AZURE_CLIENT_ID": "${input:azure-client-id}",
+        "AZURE_TENANT_ID": "${input:azure-tenant-id}",
+        "AZURE_CLIENT_SECRET": "${input:azure-client-secret}",
+        "OAUTH_REDIRECT_PORT": "${input:oauth-redirect-port}",
+        "TRANSPORT": "<TRANSPORT>",
+        "HOST": "<HOST>",
+        "HOST_PORT": "<HOST_PORT>"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "azure-client-id",
+      "type": "promptString",
+      "description": "Enter your Azure Client ID (from App Registration)",
+      "password": false
+    },
+    {
+      "id": "azure-tenant-id",
+      "type": "promptString",
+      "description": "Enter your Azure Tenant ID (Directory ID)",
+      "password": false
+    },
+    {
+      "id": "azure-client-secret",
+      "type": "promptString",
+      "description": "Enter your Azure Client Secret (Confidential Client Credential)",
+      "password": true
+    },
+    {
+      "id": "oauth-redirect-port",
+      "type": "promptString",
+      "description": "Enter OAuth redirect port (MUST match Azure App Registration, default: 8080)",
+      "password": false,
+      "default": "8080"
+    }
+  ]
+}

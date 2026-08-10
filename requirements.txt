@@ -1,0 +1,19 @@
+# Autodev — Python Dependencies
+
+## Core Automation Scripts
+
+# Document conversion (for ComponentSetup wizard)
+python-docx>=1.0.0        # Enhanced DOCX to Markdown conversion
+
+# PDF conversion (requires system packages: poppler-utils)
+# Install system dependency: sudo apt-get install poppler-utils
+# Then uncomment if needed:
+# pdfplumber>=0.7.0       # PDF text extraction alternative
+
+## MCP Server Dependencies
+# See pmt-mcp-servers-main/pyproject.toml for MCP-specific dependencies
+
+## Optional Tools
+# For advanced document analysis:
+# pandas>=1.5.0           # Data analysis for tabular logs
+# beautifulsoup4>=4.11.0  # HTML parsing for web-scraped docs

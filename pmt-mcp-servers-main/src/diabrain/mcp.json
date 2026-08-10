@@ -1,0 +1,103 @@
+{
+	"servers": {
+		"diabrain-python-mcp-server": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"diabrainmcpserver.py"
+			],
+			"cwd": "/home/<NTID>/repo1/pmt-mcp-servers/src/diabrain",
+			"env": {
+
+				"CLIENT_SECRET": "${input:diabrain-client-secret}",
+				"CLIENT_ID": "${input:diabrain-client-id}",
+				"TENANT_ID": "${input:diabrain-tenant-id}",
+				"ENABLED_BRAIN_IDS": "${input:diabrain-enabled-brain-ids}",
+				"DEFAULT_BRAIN_ID": "${input:diabrain-default-brain-id}"
+			}
+		},
+		"diabrain-docker-mcp-server": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"--platform",
+				"linux/amd64",
+				"--add-host=host.docker.internal:host-gateway",
+				"-e",
+				"CLIENT_SECRET",
+				"-e",
+				"CLIENT_ID",
+				"-e",
+				"TENANT_ID",
+				"-e",
+				"SSL_VERIFY",
+				"-e",
+				"HTTP_PROXY",
+				"-e",
+				"HTTPS_PROXY",
+				"-e",
+				"NO_PROXY",
+				"-e",
+				"http_proxy",
+				"-e",
+				"https_proxy",
+				"-e",
+				"no_proxy",
+				"-v", "~/..:/home",
+				"artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/diabrain-mcp-server:0.0.0"
+			],
+			"env": {
+
+				"CLIENT_SECRET": "${input:diabrain-client-secret}",
+				"CLIENT_ID": "${input:diabrain-client-id}",
+				"TENANT_ID": "${input:diabrain-tenant-id}",
+				"ENABLED_BRAIN_IDS": "${input:diabrain-enabled-brain-ids}",
+				"DEFAULT_BRAIN_ID": "${input:diabrain-default-brain-id}",
+				"SSL_VERIFY": "false",
+				"HTTP_PROXY": "http://host.docker.internal:3129",
+				"HTTPS_PROXY": "http://host.docker.internal:3129",
+				"http_proxy": "http://host.docker.internal:3129",
+				"https_proxy": "http://host.docker.internal:3129",
+				"NO_PROXY": "localhost,127.0.0.1,*.bosch.com,*.bosch.tech",
+				"no_proxy": "localhost,127.0.0.1,*.bosch.com,*.bosch.tech"
+			}
+		}
+	},
+	"inputs": [
+		{
+			"id": "diabrain-client-secret",
+			"type": "promptString",
+			"description": "Enter your DIA Brain client secret",
+			"password": true
+		},
+		{
+			"id": "diabrain-client-id",
+			"type": "promptString",
+			"description": "Enter your DIA Brain client ID",
+			"password": false
+		},
+		{
+			"id": "diabrain-tenant-id",
+			"type": "promptString",
+			"description": "Enter your Azure AD tenant ID",
+			"password": false
+		},
+		{
+			"id": "diabrain-enabled-brain-ids",
+			"type": "promptString",
+			"description": "Step 1: List ALL brain IDs you own (comma-separated). Example: 3jm3g_KljdIG,VoEGl_0KtuAJ,1W1jS49FB34z",
+			"password": false,
+			"default": "3jm3g_KljdIG,VoEGl_0KtuAJ"
+		},
+		{
+			"id": "diabrain-default-brain-id",
+			"type": "promptString",
+			"description": "Step 2: Pick ONE brain ID from Step 1 to use as default. Copy/paste one from above.",
+			"password": false,
+			"default": "3jm3g_KljdIG"
+		}
+	]
+}

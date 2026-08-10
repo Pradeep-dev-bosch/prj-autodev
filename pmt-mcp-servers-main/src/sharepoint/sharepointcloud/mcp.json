@@ -1,0 +1,72 @@
+{
+	"servers": {
+		"sharepoint-cloud-docker-mcp-server": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"--platform", "linux/amd64",
+				"-e", "SHAREPOINT_SITE_URL",
+				"-e", "SHAREPOINT_USERNAME",
+				"-e", "SHAREPOINT_PASSWORD",
+				"-e", "TRANSPORT",
+				"-e", "HOST",
+				"-e", "HOST_PORT",
+				"-e", "HTTP_PROXY=",
+				"-e", "HTTPS_PROXY=",
+				"-e", "http_proxy=",
+				"-e", "https_proxy=",
+				"-e", "NO_PROXY=*",
+				"-e", "no_proxy=*",
+				"-v", "~/..:/home",
+				"artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/sharepoint-cloud-mcp-server:0.0.0"
+			],
+			"env": {
+				"SHAREPOINT_SITE_URL": "<SHAREPOINT_SITE_URL>",
+				"SHAREPOINT_USERNAME": "${input:sharepoint-user}",
+				"SHAREPOINT_PASSWORD": "${input:sharepoint-pass}",
+				"HTTP_PROXY": "",
+				"HTTPS_PROXY": "",
+				"http_proxy": "",
+				"https_proxy": "",
+				"NO_PROXY": "*",
+				"no_proxy": "*",
+				"TRANSPORT": "<TRANSPORT>", //default stdio
+        		"HOST": "<HOST>", //default localhost
+        		"HOST_PORT": "<HOST_PORT>" //default 8000
+			}
+		},
+		"sharepoint-cloud-python-mcp-server": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"sharepointcloudserver.py"
+			],
+			"cwd": "/home/<NTID>/repo1/pmt-mcp-servers/src/sharepoint/sharepointcloud",
+			"env": {
+				"SHAREPOINT_SITE_URL": "<SHAREPOINT_SITE_URL>",
+				"SHAREPOINT_USERNAME": "${input:sharepoint-user}",
+				"SHAREPOINT_PASSWORD": "${input:sharepoint-pass}",
+				"TRANSPORT": "<TRANSPORT>", //default stdio
+        		"HOST": "<HOST>", //default localhost
+        		"HOST_PORT": "<HOST_PORT>" //default 8000
+			}
+		}
+	},
+    "inputs": [
+        {
+            "id": "sharepoint-user",
+            "type": "promptString",
+            "description": "Enter your SharePoint username",
+            "password": false
+        },
+        {
+            "id": "sharepoint-pass",
+            "type": "promptString",
+            "description": "Enter your SharePoint password",
+            "password": true
+        }
+    ]
+}

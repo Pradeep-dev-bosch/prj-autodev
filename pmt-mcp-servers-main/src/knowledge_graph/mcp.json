@@ -1,0 +1,46 @@
+{
+    "servers": {
+        "bug-kg-python-mcp-server": {
+            "type": "stdio",
+            "command": "uv",
+            "args": [
+                "run",
+                "kgmcpserver.py"
+            ],
+            "cwd": "<ABSOLUTE-PATH-TO>/pmt-mcp-servers-main/src/knowledge_graph",
+            "env": {
+                "NEO4J_URI":      "<YOUR-NEO4J-URI>",
+                "NEO4J_USERNAME": "<YOUR-NEO4J-USERNAME>",
+                "NEO4J_PASSWORD": "${input:neo4j-password}",
+                "NEO4J_DATABASE": "bug_knowledge_graph"
+            }
+        },
+        "bug-kg-docker-mcp-server": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "-e", "NEO4J_URI",
+                "-e", "NEO4J_USERNAME",
+                "-e", "NEO4J_PASSWORD",
+                "-e", "NEO4J_DATABASE",
+                "bug-kg-mcp-server"
+            ],
+            "env": {
+                "NEO4J_URI":      "<YOUR-NEO4J-URI>",
+                "NEO4J_USERNAME": "<YOUR-NEO4J-USERNAME>",
+                "NEO4J_PASSWORD": "${input:neo4j-password}",
+                "NEO4J_DATABASE": "bug_knowledge_graph"
+            }
+        }
+    },
+    "inputs": [
+        {
+            "id": "neo4j-password",
+            "type": "promptString",
+            "description": "Neo4j password for the knowledge graph database",
+            "password": true
+        }
+    ]
+}

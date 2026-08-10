@@ -1,0 +1,85 @@
+{
+  "servers": {
+    "docupedia-python-mcp-server": {
+      "command": "uv",
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/docupedia",
+      "args": [
+        "run",
+        "docupediamcpserver.py"
+      ],
+      "env": {
+        "CONFLUENCE_BASE_URL": "${input:docupedia-url}",
+        "CONFLUENCE_PAT_TOKEN": "${input:docupedia-token}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>", //default 8000
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+      }
+    },
+    "docupedia-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-e",
+        "CONFLUENCE_BASE_URL",
+        "-e",
+        "CONFLUENCE_PAT_TOKEN",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "NO_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "-e",
+        "no_proxy",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/docupedia-mcp-server:0.1.0"
+      ],
+      "env": {
+        "CONFLUENCE_BASE_URL": "${input:docupedia-url}",
+        "CONFLUENCE_PAT_TOKEN": "${input:docupedia-token}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>", //default 8000
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "docupedia-token",
+      "description": "Docupedia PAT token",
+      "password": true
+    },
+    {
+      "type": "pickString",
+      "id": "docupedia-url",
+      "description": "Docupedia Base URL",
+      "options": [
+        "https://inside-docupedia.bosch.com/confluence",
+        "https://inside-docupedia.bosch.com/confluence2"
+      ],
+      "default": "https://inside-docupedia.bosch.com/confluence"
+    }
+  ]
+}

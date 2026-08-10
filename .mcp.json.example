@@ -1,0 +1,55 @@
+{
+  "mcpServers": {
+    "jira-python-mcp-server": {
+      "tools": [
+        "*"
+      ],
+      "type": "stdio",
+      "command": "dotenv",
+      "args": [
+        "-e",
+        "ABSOLUTE PATH <PROJECT_ROOT>\\.env",
+        "--",
+        "uv",
+        "run",
+        "--directory",
+        "ABSOLUTE PATH <PROJECT_ROOT>\\pmt-mcp-servers-main\\src\\jira",
+        "jiramcpserver.py"
+      ]
+    },
+    "sharepoint": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "dotenv",
+      "args": [
+        "-e",
+        "ABSOLUTE PATH <PROJECT_ROOT>\\.env",
+        "--",
+        "uv",
+        "run",
+        "--directory",
+        "ABSOLUTE PATH <PROJECT_ROOT>\\pmt-mcp-servers-main\\src\\sharepoint\\sharepointonprem",
+        "sharepointonpremserver.py"
+      ]
+    },
+    "gerrit": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "command": "dotenv",
+      "args": [
+        "-e",
+        "ABSOLUTE PATH<PROJECT_ROOT>\\.env",
+        "--",
+        "uv",
+        "run",
+        "--directory",
+        "ABSOLUTE PATH <PROJECT_ROOT>\\pmt-mcp-servers-main\\src\\gerrit",
+        "gerritmcpserver.py"
+      ]
+    }
+  }
+}

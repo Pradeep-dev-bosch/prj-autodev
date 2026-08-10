@@ -1,0 +1,39 @@
+{
+  "servers": {
+    "dbea-python-mcp-server": {
+      "cwd": "src/enterprisearchitect/dbeamcpserver/",
+      "command": "uv",
+      "args": [
+        "run",
+        "dbeamcpserver.py"
+      ],
+      "env": {
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    },
+    "dbea-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "-v",
+        "~/..:/home",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/dbea-mcp-server:0.0.0"
+      ],
+      "env": {
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    }
+  }
+}

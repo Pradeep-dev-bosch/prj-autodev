@@ -1,0 +1,55 @@
+{
+  "servers": {
+    "conan-python-mcp-server": {
+      "command": "uv",
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/conan",
+      "args": [
+        "run",
+        "conanmcpserver.py"
+      ],
+      "env": {
+        "CONAN_MCP_CONAN_PATH": "/.venv/py312/bin/conan",
+        // ARTIFACTORY_CONNECTION is optional. Configure it with base Artifactory URLs (without repository path) to use list_packages_from_remote tool.
+        "ARTIFACTORY_CONNECTION": "{\"artifactory-02\": {\"url\": \"https://artifactory-02.boschdevcloud.com/artifactory\", \"user\": \"ntid@bosch.com\", \"password\": \"api-token\"}}"
+      }
+    },
+    "conan-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-e",
+        "CONAN_MCP_CONAN_PATH",
+        "-e",
+        "ARTIFACTORY_CONNECTION",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "NO_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "-e",
+        "no_proxy",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/conan-mcp-server:0.1.0"
+      ],
+      "env": {
+        "CONAN_MCP_CONAN_PATH": "conan",
+        // ARTIFACTORY_CONNECTION is optional. Configure it with base Artifactory URLs (without repository path) to use list_packages_from_remote tool.
+        "ARTIFACTORY_CONNECTION": "{\"artifactory-02\": {\"url\": \"https://artifactory-02.boschdevcloud.com/artifactory\", \"user\": \"ntid@bosch.com\", \"password\": \"api-token\"}}",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "NO_PROXY": "localhost,127.0.0.1,.bosch.com",
+        "no_proxy": "localhost,127.0.0.1,.bosch.com"
+      }
+    }
+  },
+  "inputs": []
+}

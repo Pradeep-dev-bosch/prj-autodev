@@ -1,0 +1,12 @@
+[project]
+name = "azurecosmosdb"
+version = "0.0.1"
+description = "Azure Cosmos DB MCP Server for AI assistant integration with Cosmos DB SQL API"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "azure-core==1.26.4",
+    "azure-cosmos==4.3.1",
+    "fastmcp>=2.13.3",
+    "mcp[cli]>=1.22.0",
+]

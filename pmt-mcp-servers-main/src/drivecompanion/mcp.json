@@ -1,0 +1,56 @@
+{
+  "servers": {
+    "drivecompanion-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "DRIVECOMPANION_URL",
+        "-e",
+        "DRIVECOMPANION_API_KEY",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "-v",
+        "~/..:/home",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/drivecompanion-mcp-server:0.0.0"
+      ],
+      "env": {
+        "DRIVECOMPANION_URL": "<DRIVE_COMPANION_BASE_URL>",
+        "DRIVECOMPANION_API_KEY": "${input:drivecompanion-api-key}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    },
+
+    "drivecompanion-python-mcp-server": {
+      "cwd": "${workspaceFolder}/src/drivecompanion",
+      "command": "uv",
+      "args": [
+        "run",
+        "drivecompanionmcpserver.py"
+      ],
+      "env": {
+        "DRIVECOMPANION_URL": "<DRIVE_COMPANION_BASE_URL>",
+        "DRIVECOMPANION_API_KEY": "${input:drivecompanion-api-key}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "drivecompanion-api-key",
+      "description": "User token to authenticate for open webui rag server",
+      "password": true
+    }
+  ]
+}

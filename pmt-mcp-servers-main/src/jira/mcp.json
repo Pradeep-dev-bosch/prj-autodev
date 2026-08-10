@@ -1,0 +1,54 @@
+{
+
+	"servers": {
+		"jira-python-mcp-server": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"jiramcpserver.py"
+			],
+			"cwd": "/home/<your-path>/pmt-mcp-servers/src/jira",
+			"env": {
+                "JIRA_TOKEN": "${input:jira-token}",
+                "TRACKER_URL": "<YOUR-TRACKER-URL>",
+				"HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+				"HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+				"http_proxy": "http://rb-proxy-de.bosch.com:8080",
+				"https_proxy": "http://rb-proxy-de.bosch.com:8080"
+			}
+		},
+		"jira-docker-mcp-server": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"-e", "JIRA_TOKEN",
+				"-e", "TRACKER_URL",
+                "-e", "HTTP_PROXY",
+                "-e", "HTTPS_PROXY",
+                "-e", "http_proxy",
+                "-e", "https_proxy",
+				"-v", "~/..:/home",
+				"artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/jira-mcp-server:0.2.0"
+			],
+			"env": {
+                "JIRA_TOKEN": "${input:jira-token}",
+                "TRACKER_URL": "<YOUR-TRACKER-URL>",
+				"HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+				"HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+				"http_proxy": "http://rb-proxy-de.bosch.com:8080",
+				"https_proxy": "http://rb-proxy-de.bosch.com:8080"
+			}
+		}
+	},
+    "inputs": [
+        {
+            "id": "jira-token",
+            "type": "promptString",
+            "description": "Enter your Jira token",
+            "password": true
+        }
+    ]
+}

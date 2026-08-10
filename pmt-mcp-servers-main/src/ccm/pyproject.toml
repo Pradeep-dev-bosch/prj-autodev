@@ -1,0 +1,10 @@
+[project]
+name = "ccm"
+version = "0.0.0"
+description = "IBM RTC/CCM MCP server"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.14.3",
+    "rtcclient>=0.10.0",
+]

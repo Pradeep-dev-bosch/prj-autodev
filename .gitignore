@@ -1,0 +1,54 @@
+# MCP configuration (user-specific)
+.vscode/mcp.json
+
+# Workspace file contains user-specific AOSP paths — each developer has their own copy
+custome_agents.code-workspace
+
+# Autodev workspace directories (JIRA attachments, logs, temporary files)
+core/workspace/
+
+# JIRA attachment downloads (may land in MCP server src dirs during development)
+pmt-mcp-servers-main/src/jira/*.pdf
+pmt-mcp-servers-main/src/jira/*.zip
+pmt-mcp-servers-main/src/jira/*.mp4
+pmt-mcp-servers-main/src/jira/*.xlsx
+pmt-mcp-servers-main/src/jira/*.txt
+
+# Component source documents (uploaded originals - keep converted .md files)
+core/docs/components/*/source-documents/*.docx
+core/docs/components/*/source-documents/*.pdf
+core/docs/components/*/source-documents/*.doc
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+*.so
+.pytest_cache/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials
+*.env
+.credentials/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*~
+.swp
+

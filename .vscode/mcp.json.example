@@ -1,0 +1,62 @@
+{
+  "servers": {
+    "jira": {
+      "type": "stdio",
+      "command": "/home/YOUR_USERNAME/.local/bin/uv",
+      "args": ["run", "jiramcpserver.py"],
+      "cwd": "/absolute/path/to/pmt-mcp-servers-main/src/jira",
+      "env": {
+        "TRACKER_URL": "${input:jira-url}",
+        "JIRA_TOKEN": "${input:jira-token}"
+      }
+    },
+    "sharepoint": {
+      "type": "stdio",
+      "command": "/home/YOUR_USERNAME/.local/bin/uv",
+      "args": ["run", "sharepointonpremserver.py"],
+      "cwd": "/absolute/path/to/pmt-mcp-servers-main/src/sharepoint/sharepointonprem",
+      "env": {
+        "SHAREPOINT_URL": "https://sharepoint.yourcompany.com",
+        "SHAREPOINT_USERNAME": "DOMAIN\\your-username",
+        "SHAREPOINT_PASSWORD": "${input:sharepoint-password}"
+      }
+    },
+    "gerrit": {
+      "type": "stdio",
+      "command": "/home/YOUR_USERNAME/.local/bin/uv",
+      "args": ["run", "gerritmcpserver.py"],
+      "cwd": "/absolute/path/to/pmt-mcp-servers-main/src/gerrit",
+      "env": {
+        "GERRIT_URL": "https://gerrit.yourcompany.com",
+        "GERRIT_USERNAME": "your-username",
+        "GERRIT_HTTP_PASSWORD": "${input:gerrit-password}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "jira-url",
+      "type": "promptString",
+      "description": "Enter your JIRA base URL",
+      "default": "https://jira.yourcompany.com"
+    },
+    {
+      "id": "jira-token",
+      "type": "promptString",
+      "description": "Enter your JIRA personal access token",
+      "password": true
+    },
+    {
+      "id": "sharepoint-password",
+      "type": "promptString",
+      "description": "Enter your SharePoint password",
+      "password": true
+    },
+    {
+      "id": "gerrit-password",
+      "type": "promptString",
+      "description": "Enter your Gerrit HTTP password",
+      "password": true
+    }
+  ]
+}

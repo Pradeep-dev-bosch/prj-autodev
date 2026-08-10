@@ -1,0 +1,59 @@
+{
+  "servers": {
+    "bitbucket-python-mcp-server": {
+      "cwd": "<path-to-repository>/pmt-mcp-servers/src/bitbucket",
+      "command": "uv",
+      "args": [
+        "run",
+        "bitbucketmcpserver.py"
+      ],
+      "env": {
+        "BITBUCKET_TOKEN": "${input:bitbucket-http-token}",
+        "BITBUCKET_URL": "<BITBUCKET-SERVER-URL>",
+        "ALLOW_DELETION": "false",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    },
+    "bitbucket-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "BITBUCKET_TOKEN",
+        "-e",
+        "BITBUCKET_URL",
+        "-e",
+        "ALLOW_DELETION",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "-v",
+        "~/..:/home",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/bitbucket-mcp-server:0.0.0"
+      ],
+      "env": {
+        "BITBUCKET_TOKEN": "${input:bitbucket-http-token}",
+        "BITBUCKET_URL": "<BITBUCKET-SERVER-URL>",
+        "ALLOW_DELETION": "false",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "bitbucket-http-token",
+      "description": "User token to authenticate for bitbucket server",
+      "password": true
+    }
+  ]
+}

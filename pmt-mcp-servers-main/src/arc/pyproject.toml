@@ -1,0 +1,47 @@
+[project]
+name = "arc-mcp-server"
+version = "0.0.0"
+description = "ARC (Automatic Release Checker) MCP server for automating QG questionnaire evaluation and release compliance"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.12.5",
+    "pydantic>=2.0.0,<3",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
+    "arc==3.5",
+    "Office365-REST-Python-Client>=2.5.10",
+    "matplotlib<3.9",
+    "pyyaml>=6.0.2",
+    "prettytable>=3.11.0",
+    "colorama>=0.4.6",
+    "jinja2>=3.1.4",
+    "requests>=2.32.3",
+    "numpy>=1.24.4",
+    "importlib-resources>=6.4.2",
+    "xlsxwriter>=3.2.0",
+    "pandas>=2.0.3",
+    "openpyxl>=3.1.5",
+    "python-dotenv>=1.0.1",
+    "typer>=0.7.0",
+    "requests-ntlm>=1.3.0",
+    "pytest>=8.3.4",
+    "pytest-mock>=3.14.0",
+    "sphinx>=5.1.1",
+    "sphinx-rtd-theme",
+    "PyPDF2>=3.0.1",
+    "pdfplumber",
+    "python-docx",
+    "atlassian-python-api",
+    "oracledb",
+    "eval_type_backport",
+    "py7zr"
+]
+
+[[tool.uv.index]]
+name = "pysofa-arc"
+url = "https://rb-artifactory.bosch.com/artifactory/api/pypi/pysofa-arc-pypi-release-local/simple"
+explicit = true
+
+[tool.uv.sources]
+arc = { index = "pysofa-arc" }

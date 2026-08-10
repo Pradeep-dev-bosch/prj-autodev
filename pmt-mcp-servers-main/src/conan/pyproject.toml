@@ -1,0 +1,10 @@
+[project]
+name = "conan"
+version = "0.0.0"
+description = "Conan MCP server for managing Conan package dependencies with search, installation, and dependency graph capabilities"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=2.12.4",
+    "pydantic>=2.0.0"
+]

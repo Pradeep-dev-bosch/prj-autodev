@@ -1,0 +1,22 @@
+FROM docker-io-remote.rb-artifactory.bosch.com/python:3.13-slim
+
+WORKDIR /app
+
+# Install uv via pip
+RUN pip install --proxy http://rb-proxy-de.bosch.com:8080 uv
+
+# Copy uv configuration
+COPY pyproject.toml uv.lock ./
+
+# Install dependencies using uv with lock file
+RUN uv sync --frozen --no-dev
+
+# Copy the server code
+COPY . .
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+# Expose the server
+ENTRYPOINT ["uv", "run", "codebeamermcpserver.py"]

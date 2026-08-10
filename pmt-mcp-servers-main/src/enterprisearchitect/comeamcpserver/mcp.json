@@ -1,0 +1,12 @@
+{
+    "servers": {
+        "comea-python-mcp-server": {
+            "cwd": "src/enterprisearchitect/comeamcpserver/",
+            "command": "uv",
+            "args": [
+                "run",
+                "comeamcpserver.py"
+            ]
+        }
+    }
+}

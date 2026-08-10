@@ -1,0 +1,49 @@
+{
+  "servers": {
+    "github-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN=${input:GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "-e",
+        "GITHUB_HOST=${input:GITHUB_HOST}",
+        "-e",
+        "GITHUB_TOOLSETS=default",
+        "-e",
+        "GITHUB_DYNAMIC_TOOLSETS=${input:GITHUB_DYNAMIC_TOOLSETS}",
+        "ghcr.io/github/github-mcp-server:0.31.0"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "GITHUB_PERSONAL_ACCESS_TOKEN",
+      "description": "GitHub Personal Access Token (PAT)",
+      "password": true
+    },
+    {
+      "type": "pickString",
+      "id": "GITHUB_HOST",
+      "description": "GitHub Host URL",
+      "options": [
+        "https://github.boschdevcloud.com",
+        "https://github.com"
+      ],
+      "default": "https://github.boschdevcloud.com"
+    },
+    {
+      "type": "pickString",
+      "id": "GITHUB_DYNAMIC_TOOLSETS",
+      "description": "Enable dynamic toolset loading",
+      "options": [
+        "1",
+        "0"
+      ],
+      "default": "1"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+    "servers": {
+        "artifactory-python-mcp-server": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "/path/to/repo/pmt-mcp-servers/src/artifactory",
+                "run",
+                "artifactorymcpserver.py"
+            ],
+            "cwd": "/path/to/repo/pmt-mcp-servers/src/artifactory",
+            "env": {
+                "ARTIFACTORY_BASE_URL": "<ARTIFACTORY_BASE_URL>",
+                "ARTIFACTORY_PAT_TOKEN": "${input:ARTIFACTORY_PAT_TOKEN}",
+                "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+                "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+                "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+                "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+            }
+        },
+        "artifactory-docker-mcp-server": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "--platform",
+                "linux/amd64",
+                "-e",
+                "ARTIFACTORY_BASE_URL",
+                "-e",
+                "ARTIFACTORY_PAT_TOKEN",
+                "-v", "~/..:/home",
+                "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/artifactory-mcp-server:0.0.0"
+            ],
+            "env": {
+                "ARTIFACTORY_BASE_URL": "<ARTIFACTORY_BASE_URL>",
+                "ARTIFACTORY_PAT_TOKEN": "${input:ARTIFACTORY_PAT_TOKEN}",
+                "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+                "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+                "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+                "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+            }
+        }
+    },
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "ARTIFACTORY_PAT_TOKEN",
+			"description": "artifactory token",
+			"password": true
+		}
+	]
+}

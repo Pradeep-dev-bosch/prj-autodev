@@ -1,0 +1,20 @@
+# Exclude Python cache files
+**/__pycache__
+**/*.pyc
+
+# Exclude Git files
+.git
+.gitignore
+
+# Exclude README and environment files
+README.md
+.env
+
+# Exclude logs
+logs/
+
+# Exclude development files
+*.log
+.vscode/
+*.tmp
+

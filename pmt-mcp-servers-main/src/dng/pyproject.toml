@@ -1,0 +1,11 @@
+[project]
+name = "dng"
+version = "0.1.0"
+description = "MCP server implementation for IBM Doors Next Generation"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "elmclient>=0.36.1",
+    "fastmcp>=2.13.3",
+    "requests>=2.32.5",
+]

@@ -1,0 +1,12 @@
+[project]
+name = "sharepoint-onprem"
+version = "0.0.0"
+description = "SharePoint On-Premises MCP server implementation using NTLM authentication for managing files, folders, and site operations"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.12.4",
+    "requests>=2.31.0",
+    "requests_ntlm>=1.1.0",
+    "types-requests>=2.31.0"
+]

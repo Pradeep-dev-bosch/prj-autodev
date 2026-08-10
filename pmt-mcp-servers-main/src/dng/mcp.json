@@ -1,0 +1,89 @@
+{
+  "servers": {
+    "dng-python-mcp-server": {
+      "command": "uv",
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/dng",
+      "args": [
+        "run",
+        "dngmcpserver.py"
+      ],
+      "env": {
+        "DNG_SERVER": "<DNG_SERVER>",
+        "DNG_USERNAME": "${input:dng-username}",
+        "DNG_PASSWORD": "${input:dng-password}",
+        "DNG_VERIFY_SSL": "false",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "TRANSPORT": "<TRANSPORT>",
+        "HOST": "<HOST>",
+        "HOST_PORT": "<HOST_PORT>"
+      }
+    },
+    "dng-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-e",
+        "DNG_SERVER",
+        "-e",
+        "DNG_USERNAME",
+        "-e",
+        "DNG_PASSWORD",
+        "-e",
+        "DNG_VERIFY_SSL",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "NO_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "-e",
+        "no_proxy",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/dng-mcp-server:0.1.0"
+      ],
+      "env": {
+        "DNG_SERVER": "<DNG_SERVER>",
+        "DNG_USERNAME": "${input:dng-username}",
+        "DNG_PASSWORD": "${input:dng-password}",
+        "DNG_VERIFY_SSL": "false",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "TRANSPORT": "<TRANSPORT>",
+        "HOST": "<HOST>",
+        "HOST_PORT": "<HOST_PORT>"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "dng-password",
+      "description": "DNG PASSWORD",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "dng-username",
+      "description": "DNG Username",
+      "password": false
+    }
+  ]
+}

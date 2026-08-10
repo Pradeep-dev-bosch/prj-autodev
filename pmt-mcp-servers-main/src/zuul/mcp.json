@@ -1,0 +1,32 @@
+{
+  "servers": {
+    "zuul-mcp-server": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/zuul-mcp-server", // Zuul Repo: https://github.boschdevcloud.com/bios-genAI/zuul-mcp-server/
+        "run",
+        "zuul-mcp-server"
+      ],
+      "env": {
+        "ZUUL_AUTH_TOKEN": "${input:ZUUL_AUTH_TOKEN}",
+        "ZUUL_API_URL": "${input:ZUUL_API_URL}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "ZUUL_AUTH_TOKEN",
+      "description": "Zuul Auth Token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "ZUUL_API_URL",
+      "description": "Zuul API URL",
+      "password": false
+    }
+  ]
+}

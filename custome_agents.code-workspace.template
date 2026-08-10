@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "name": "Autodev",
+            "path": "."
+        },
+        {
+            "name": "YourProject",
+            "path": "/path/to/your/aosp"
+        }
+    ],
+    "settings": {}
+}

@@ -1,0 +1,63 @@
+{
+    "servers": {
+        "azure-cosmos-db-docker-mcp-server": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "-e",
+                "COSMOS_HOST",
+                "-e",
+                "COSMOS_KEY",
+                "-e",
+                "COSMOS_DATABASE",
+                "-e",
+                "TRANSPORT",
+                "-e",
+                "MCP_BINDING",
+                "-e",
+                "PORT",
+                "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/azurecosmosdb-mcp-server:0.1.0"
+            ],
+            "env": {
+                "COSMOS_HOST": "${input:COSMOS_HOST}", // ex: https://vsm-powerbi-backend.documents.azure.com:443/
+                "COSMOS_KEY": "${input:COSMOS_KEY}",
+                "COSMOS_DATABASE": "<COSMOS_DATABASE>", // ex: vsm-backend
+                "TRANSPORT": "<TRANSPORT>", // default stdio
+                "MCP_BINDING": "<MCP_BINDING>", // default localhost
+                "PORT": "<PORT>" // default 8000
+            }
+        },
+        "azure-cosmos-db-python-mcp-server": {
+            "command": "uv",
+            "cwd": "${workspaceFolder}/src/azure/azurecosmosdb",
+            "args": [
+                "run",
+                "azurecosmosdbmcpserver.py"
+            ],
+            "env": {
+                "COSMOS_HOST": "${input:COSMOS_HOST}", // ex: https://vsm-powerbi-backend.documents.azure.com:443/
+                "COSMOS_KEY": "${input:COSMOS_KEY}",
+                "COSMOS_DATABASE": "<COSMOS_DATABASE>", // ex: vsm-backend
+                "TRANSPORT": "<TRANSPORT>", // default stdio
+                "MCP_BINDING": "<MCP_BINDING>", // default localhost
+                "PORT": "<PORT>" // default 8000
+            }
+        }
+    },
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "COSMOS_KEY",
+            "description": "Cosmos Database key",
+            "password": true
+        },
+        {
+            "type": "promptString",
+            "id": "COSMOS_HOST",
+            "description": "Cosmos Database host url",
+            "password": false
+        }
+    ]
+}

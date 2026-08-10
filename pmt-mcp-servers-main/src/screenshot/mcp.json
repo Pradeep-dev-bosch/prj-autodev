@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "screenshot-mcp-server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "src/screenshot",
+        "run",
+        "screenshotmcpserver.py"
+      ]
+    }
+  }
+}

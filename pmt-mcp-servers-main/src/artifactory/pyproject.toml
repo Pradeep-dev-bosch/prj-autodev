@@ -1,0 +1,10 @@
+[project]
+name = "artifactory"
+version = "0.0.0"
+description = "JFrog Artifactory MCP server"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.12.5",
+    "requests>=2.32.5",
+]

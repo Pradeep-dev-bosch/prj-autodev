@@ -1,0 +1,18 @@
+{
+  "servers": {
+    "canoe-python-mcp-server": {
+      "cwd": "${workspaceFolder}/src/canoe",
+      "command": "uv",
+      "args": [
+        "run",
+        "canoemcpserver.py"
+      ],
+      "env": {
+        "TESTBENCH_ADDRESS": "<TESTBENCH_ADDRESS>:<CANOE_REMOTE_PORT>", //e.g., ABT-C-0000.abt.de.bosch.com:8005 
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    }
+  }
+}

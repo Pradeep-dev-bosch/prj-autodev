@@ -1,0 +1,91 @@
+{
+  "servers": {
+    "etm-python-mcp-server": {
+      "command": "uv",
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/etm",
+      "args": [
+        "run",
+        "etmmcpserver.py"
+      ],
+      "env": {
+        "ETM_BASE_URL": "<ETM_BASE_URL>",
+        "ETM_USERNAME": "${input:etm-username}",
+        "ETM_PASSWORD": "${input:etm-password}",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    },
+    "etm-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-e",
+        "ETM_BASE_URL",
+        "-e",
+        "ETM_USERNAME",
+        "-e",
+        "ETM_PASSWORD",
+        "-e",
+        "ETM_PROJECT_AREA",
+        "-e",
+        "ETM_VERIFY_SSL",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "NO_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "-e",
+        "no_proxy",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/etm-mcp-server:0.1.0"
+      ],
+      "env": {
+        "ETM_BASE_URL": "<ETM_BASE_URL>",
+        "ETM_USERNAME": "${input:etm-username}",
+        "ETM_PASSWORD": "${input:etm-password}",
+        "ETM_PROJECT_AREA": "<ETM_PROJECT_AREA>",
+        "ETM_VERIFY_SSL": "False",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>" //default 8000
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "etm-password",
+      "description": "ETM PASSWORD",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "etm-username",
+      "description": "ETM Username",
+      "password": false
+    }
+  ]
+}

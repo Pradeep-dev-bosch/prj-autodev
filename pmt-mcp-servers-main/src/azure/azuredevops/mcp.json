@@ -1,0 +1,36 @@
+{
+  "servers": {
+    "azure-devops": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "AZDO_ORG_URL",
+        "-e",
+        "AZDO_PAT",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/azuredevops-mcp-server:0.1.0"
+      ],
+      "env": {
+        "AZDO_ORG_URL": "${input:AZDO_ORG_URL}",
+        "AZDO_PAT": "${input:AZDO_PAT}"
+      }
+    }
+  },
+
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "AZDO_PAT",
+      "description": "azure devops personal access token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "AZDO_ORG_URL",
+      "description": "azure devops organization url",
+      "password": false
+    }
+  ]
+}

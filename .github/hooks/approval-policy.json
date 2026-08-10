@@ -1,0 +1,10 @@
+{
+  "hooks": [
+    {
+      "type": "preToolUse",
+      "command": "pwsh -File scripts/mcp-approval-gate.ps1",
+      "description": "Require human approval before irreversible MCP tool calls (JIRA writes, Gerrit push)"
+    }
+  ]
+}
+

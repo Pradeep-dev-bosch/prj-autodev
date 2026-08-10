@@ -1,0 +1,28 @@
+{
+	"servers": {
+		"qac-mcp-server": {
+			"command": "qac-mcp",
+			"cwd": "${workspaceFolder}",
+			"env": {
+				"ARTIFACTORY_URL": "https://artifactory.boschdevcloud.com",
+				"ARTIFACTORY_USER": "${input:ARTIFACTORY_USER}", // NT-ID@bosch.com
+				"ARTIFACTORY_API_TOKEN": "${input:ARTIFACTORY_API_TOKEN}",
+				"BASELINE_URL": "od-artifacts-develop-local/latest/rpc_apl/ALPHA_2_QACPP/qac-baseline/develop/files.sup"
+			}
+		}
+	},
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "ARTIFACTORY_USER",
+			"description": "ARTIFACTORY_USER",
+			"password": false
+		},
+		{
+			"type": "promptString",
+			"id": "ARTIFACTORY_API_TOKEN",
+			"description": "ARTIFACTORY_API_TOKEN",
+			"password": true
+		}
+	]
+}

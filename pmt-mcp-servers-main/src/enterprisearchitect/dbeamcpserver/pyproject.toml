@@ -1,0 +1,9 @@
+[project]
+name = "db-ea-mcp-server"
+version = "0.0.0"
+description = "MCP server for EA database query"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "fastmcp>=2.12.4"
+]

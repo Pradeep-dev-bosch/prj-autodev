@@ -1,0 +1,177 @@
+{
+  "servers": {
+    "arc-python-mcp-server": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/repository/pmt-mcp-servers/src/arc",
+        "run",
+        "arcmcpserver.py"
+      ],
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/arc",
+      "env": {
+        "ARC_WORKSPACE": "/path/to/workspace",
+        "CERT_PATH": "",
+        "PYTHON_EXEC": "/path/to/workspace/.venv/bin/python",
+        "TECH_USERNAME": "${input:TECH_USERNAME}",
+        "JFROG_TOKEN": "${input:JFROG_TOKEN}",
+        "SHAREPOINT_USERNAME": "${input:SHAREPOINT_USERNAME}",
+        "SHAREPOINT_PASSWORD": "${input:SHAREPOINT_PASSWORD}",
+        "SQL_TECH_PASSWORD": "${input:SQL_TECH_PASSWORD}",
+        "ONEQ_API_KEY": "${input:ONEQ_API_KEY}",
+        "ONEQ_SECRET": "${input:ONEQ_SECRET}",
+        "SPLUNK_USERNAME": "${input:SPLUNK_USERNAME}",
+        "SPLUNK_PASSWORD": "${input:SPLUNK_PASSWORD}",
+        "JIRA_TOKEN": "${input:JIRA_TOKEN}",
+        "DOCUPEDIA_TOKEN": "${input:DOCUPEDIA_TOKEN}",
+        "BU": "${input:BU}",
+        "UV_INDEX_pysofa_arc_USERNAME": "${input:TECH_USERNAME}",
+        "UV_INDEX_pysofa_arc_PASSWORD": "${input:JFROG_TOKEN}",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+      }
+    },
+    "arc-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-v",
+        "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro",
+        "-v",
+        "/path/to/workspace:/app/workspace",
+        "-e",
+        "ARC_WORKSPACE",
+        "-e",
+        "CERT_PATH",
+        "-e",
+        "PYTHON_EXEC",
+        "-e",
+        "TECH_USERNAME",
+        "-e",
+        "JFROG_TOKEN",
+        "-e",
+        "SHAREPOINT_USERNAME",
+        "-e",
+        "SHAREPOINT_PASSWORD",
+        "-e",
+        "SQL_TECH_PASSWORD",
+        "-e",
+        "ONEQ_API_KEY",
+        "-e",
+        "ONEQ_SECRET",
+        "-e",
+        "SPLUNK_USERNAME",
+        "-e",
+        "SPLUNK_PASSWORD",
+        "-e",
+        "JIRA_TOKEN",
+        "-e",
+        "DOCUPEDIA_TOKEN",
+        "-e",
+        "BU",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/arc-mcp-server:0.0.0"
+      ],
+      "env": {
+        "ARC_WORKSPACE": "/app/workspace",
+        "CERT_PATH": "",
+        "PYTHON_EXEC": "/app/.venv/bin/python",
+        "TECH_USERNAME": "${input:TECH_USERNAME}",
+        "JFROG_TOKEN": "${input:JFROG_TOKEN}",
+        "SHAREPOINT_USERNAME": "${input:SHAREPOINT_USERNAME}",
+        "SHAREPOINT_PASSWORD": "${input:SHAREPOINT_PASSWORD}",
+        "SQL_TECH_PASSWORD": "${input:SQL_TECH_PASSWORD}",
+        "ONEQ_API_KEY": "${input:ONEQ_API_KEY}",
+        "ONEQ_SECRET": "${input:ONEQ_SECRET}",
+        "SPLUNK_USERNAME": "${input:SPLUNK_USERNAME}",
+        "SPLUNK_PASSWORD": "${input:SPLUNK_PASSWORD}",
+        "JIRA_TOKEN": "${input:JIRA_TOKEN}",
+        "DOCUPEDIA_TOKEN": "${input:DOCUPEDIA_TOKEN}",
+        "BU": "${input:BU}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "TECH_USERNAME",
+      "description": "Technical username for Artifactory",
+      "password": false
+    },
+    {
+      "type": "promptString",
+      "id": "JFROG_TOKEN",
+      "description": "JFrog authentication token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "SHAREPOINT_USERNAME",
+      "description": "SharePoint username",
+      "password": false
+    },
+    {
+      "type": "promptString",
+      "id": "SHAREPOINT_PASSWORD",
+      "description": "SharePoint password",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "SQL_TECH_PASSWORD",
+      "description": "SQL technical password",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "ONEQ_API_KEY",
+      "description": "OneQ API key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "ONEQ_SECRET",
+      "description": "OneQ secret",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "SPLUNK_USERNAME",
+      "description": "Splunk username",
+      "password": false
+    },
+    {
+      "type": "promptString",
+      "id": "SPLUNK_PASSWORD",
+      "description": "Splunk password",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "JIRA_TOKEN",
+      "description": "Jira API token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "DOCUPEDIA_TOKEN",
+      "description": "Docupedia authentication token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "BU",
+      "description": "Business unit code (e.g., XC-AS)",
+      "password": false
+    }
+  ]
+}
+
+
+
+

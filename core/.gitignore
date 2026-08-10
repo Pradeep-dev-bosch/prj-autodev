@@ -1,0 +1,15 @@
+# DebugPilot workspace - exclude processed JIRA data
+workspace/*/
+!workspace/README.md
+
+# MCP configuration (user-specific paths)
+../.vscode/mcp.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# IDE
+.vscode/settings.json
+.idea/

@@ -1,0 +1,23 @@
+services:
+  cx:
+    image: artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/codebeamer-devenv:latest
+    container_name: cx-container
+    environment:
+      - ENVIRONMENT=cx
+    volumes:
+      - .:/workspaces/pmt-mcp-servers/src/codebeamer
+    working_dir: /app
+
+  dev:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: dev-container
+    environment:
+      - ENVIRONMENT=dev
+    volumes:
+      - .:/workspaces/pmt-mcp-servers/src/codebeamer
+    working_dir: /app
+    command: sleep infinity
+    depends_on:
+      - cx

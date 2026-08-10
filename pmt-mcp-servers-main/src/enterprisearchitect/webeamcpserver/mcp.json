@@ -1,0 +1,55 @@
+{
+  "servers": {
+    "webea-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "WEBEA_USERNAME",
+        "-e",
+        "WEBEA_PASSWORD",
+        "-e",
+        "WEBEA_ENDPOINT",
+        "-e",
+        "WEBEA_MODEL",
+        "-v",
+        "~/..:/home",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/webea-mcp-server:0.1.0"
+      ],
+      "env": {
+        "WEBEA_USERNAME": "<REGION\\WEBEA_USERNAME>",
+        "WEBEA_PASSWORD": "${input:webea-password}",
+        "WEBEA_ENDPOINT": "<WEBEA_ENDPOINT>",
+        "WEBEA_MODEL": "<WEBEA_MODEL_NAME>",
+        "HTTP_PROXY": "<HTTP_PROXY>",
+        "HTTPS_PROXY": "<HTTPS_PROXY>",
+        "http_proxy": "<HTTP_PROXY>",
+        "https_proxy": "<HTTPS_PROXY>"
+      }
+    },
+    "webea-python-mcp-server": {
+      "cwd": "src/enterprisearchitect/webeamcpserver/",
+      "command": "uv",
+      "args": [
+        "run",
+        "webeamcpserver.py"
+      ],
+      "env": {
+        "WEBEA_USERNAME": "<REGION\\WEBEA_USERNAME>",
+        "WEBEA_PASSWORD": "${input:webea-password}",
+        "WEBEA_ENDPOINT": "<WEBEA_ENDPOINT>",
+        "WEBEA_MODEL": "<WEBEA_MODEL_NAME>"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "webea-password",
+      "description": "User password to authenticate for WebEA server",
+      "password": true
+    }
+  ]
+}

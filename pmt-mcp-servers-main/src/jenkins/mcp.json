@@ -1,0 +1,84 @@
+{
+  "servers": {
+    "jenkins-python-mcp-server": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "jenkinsmcpserver.py"
+      ],
+      "cwd": "/home/<NTID>/repo1/pmt-mcp-servers/src/jenkins",
+      "env": {
+        "JENKINS_BASE_URL": "${input:JENKINS_BASE_URL}",
+        "JENKINS_USERNAME": "${input:JENKINS_USERNAME}",
+        "JENKINS_API_TOKEN": "${input:JENKINS_API_TOKEN}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>", //default 8000
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+      }
+    },
+    "jenkins-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-v",
+        "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro",
+        "-e",
+        "JENKINS_BASE_URL",
+        "-e",
+        "JENKINS_USERNAME",
+        "-e",
+        "JENKINS_API_TOKEN",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/jenkins-mcp-server:0.0.0"
+      ],
+      "env": {
+        "JENKINS_BASE_URL": "${input:JENKINS_BASE_URL}",
+        "JENKINS_USERNAME": "${input:JENKINS_USERNAME}",
+        "JENKINS_API_TOKEN": "${input:JENKINS_API_TOKEN}",
+        "TRANSPORT": "<TRANSPORT>", //default stdio
+        "HOST": "<HOST>", //default localhost
+        "HOST_PORT": "<HOST_PORT>", //default 8000
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "JENKINS_BASE_URL",
+      "description": "Jenkins server URL (e.g., https://rb-jmaas.de.bosch.com/YourProject)",
+      "password": false
+    },
+    {
+      "type": "promptString",
+      "id": "JENKINS_USERNAME",
+      "description": "Jenkins username - Leave empty for anonymous access",
+      "password": false
+    },
+    {
+      "type": "promptString",
+      "id": "JENKINS_API_TOKEN",
+      "description": "Jenkins API token - Leave empty for anonymous access",
+      "password": true
+    }
+  ]
+}

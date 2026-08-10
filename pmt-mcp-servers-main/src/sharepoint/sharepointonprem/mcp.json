@@ -1,0 +1,62 @@
+{
+	"servers": {
+		"sharepoint-onprem-docker-mcp-server": {
+			"command": "docker",
+			"args": [
+				"run",
+				"-i",
+				"--rm",
+				"--platform", "linux/amd64",
+				"-v", "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro",
+				"-v", "~/..:/home",
+				"-e", "SHAREPOINT_SITE_URL",
+				"-e", "SHAREPOINT_USERNAME",
+				"-e", "SHAREPOINT_PASSWORD",
+				"-e", "TRANSPORT",
+				"-e", "HOST",
+				"-e", "HOST_PORT",
+				"artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/sharepoint-onprem-mcp-server:0.0.0"
+			],
+			"env": {
+				"SHAREPOINT_SITE_URL": "<SHAREPOINT_SITE_URL>",
+				"SHAREPOINT_USERNAME": "${input:sharepoint-onprem-user}",
+				"SHAREPOINT_PASSWORD": "${input:sharepoint-onprem-pass}",
+				"TRANSPORT": "<TRANSPORT>", //default stdio
+        		"HOST": "<HOST>", //default localhost
+        		"HOST_PORT": "<HOST_PORT>" //default 8000
+			}
+		},
+		"sharepoint-onprem-python-mcp-server": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"run",
+				"sharepointonpremserver.py"
+			],
+			"cwd": "/home/<NTID>/repo1/pmt-mcp-servers/src/sharepoint/sharepointonprem",
+			"env": {
+				"SHAREPOINT_SITE_URL": "<SHAREPOINT_SITE_URL>",
+				"SHAREPOINT_USERNAME": "${input:sharepoint-onprem-user}",
+				"SHAREPOINT_PASSWORD": "${input:sharepoint-onprem-pass}",
+				"CERTIFICATE_PATH": "",
+				"TRANSPORT": "<TRANSPORT>", //default stdio
+        		"HOST": "<HOST>", //default localhost
+        		"HOST_PORT": "<HOST_PORT>" //default 8000
+			}
+		}
+	},
+    "inputs": [
+        {
+            "id": "sharepoint-onprem-user",
+            "type": "promptString",
+            "description": "Enter your Windows domain NTID (e.g., DOMAIN\\NTID)",
+            "password": false
+        },
+        {
+            "id": "sharepoint-onprem-pass",
+            "type": "promptString",
+            "description": "Enter your Windows domain password",
+            "password": true
+        }
+    ]
+}

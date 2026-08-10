@@ -1,0 +1,10 @@
+[project]
+name = "com-ea-mcp-server"
+version = "0.1.0"
+description = "MCP server for EA with com interface"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.12.4",
+    "pywin32>=311",
+]

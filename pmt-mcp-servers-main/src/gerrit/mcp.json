@@ -1,0 +1,43 @@
+{
+    "servers": {
+        "gerrit-python-mcp-server": {
+            "type": "stdio",
+            "command": "uv",
+            "args": [
+                "run",
+                "gerritmcpserver.py"
+            ],
+            "cwd": "<ABSOLUTE-PATH-TO>/pmt-mcp-servers-main/src/gerrit",
+            "env": {
+                "GERRIT_URL": "<YOUR-GERRIT-URL>",
+                "GERRIT_USERNAME": "<YOUR-GERRIT-USERNAME>",
+                "GERRIT_HTTP_PASSWORD": "${input:gerrit-http-password}"
+            }
+        },
+        "gerrit-docker-mcp-server": {
+            "command": "docker",
+            "args": [
+                "run",
+                "-i",
+                "--rm",
+                "-e", "GERRIT_URL",
+                "-e", "GERRIT_USERNAME",
+                "-e", "GERRIT_HTTP_PASSWORD",
+                "gerrit-mcp-server"
+            ],
+            "env": {
+                "GERRIT_URL": "<YOUR-GERRIT-URL>",
+                "GERRIT_USERNAME": "<YOUR-GERRIT-USERNAME>",
+                "GERRIT_HTTP_PASSWORD": "${input:gerrit-http-password}"
+            }
+        }
+    },
+    "inputs": [
+        {
+            "id": "gerrit-http-password",
+            "type": "promptString",
+            "description": "Gerrit HTTP password (from Account Settings > HTTP Credentials)",
+            "password": true
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+  "servers": {
+    "codebeamer-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform", "linux/amd64",
+        "-e", "CB_USER",
+        "-e", "CB_PASS",
+        "-e", "CB_BASE_URL",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/codebeamer-mcp-server:0.0.0"
+      ],
+      "env": {
+        "CB_BASE_URL": "<CB_BASE_URL>",
+        "CB_USER": "<NTID>",
+        "CB_PASS": "${input:CB_PASS}"
+      }
+    },
+    "codebeamer-python-mcp-server": {
+      "type":"stdio",
+      "command": "uv",
+      "args": ["run", "codebeamermcpserver.py"],
+      "cwd": "/path/to/repository/pmt-mcp-servers/src/codebeamer",
+      "env": {
+        "CB_BASE_URL": "<CB_BASE_URL>",
+        "CB_USER": "<NTID>",
+        "CB_PASS": "${input:CB_PASS}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "CB_PASS",
+      "description": "Codebeamer password",
+      "password": true
+    }
+  ]
+}

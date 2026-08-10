@@ -1,0 +1,85 @@
+{
+  "servers": {
+    "ccm-python-mcp-server": {
+        "command": "uv",
+        "cwd": "${workspaceFolder}/src/ccm",
+        "args": [
+            "run",
+            "ccmmcpserver.py"
+        ],
+        "env": {
+        "RTC_SERVER_URL": "https://rb-alm-13-q.de.bosch.com",
+        "RTC_USERNAME": "${input:RTC_USERNAME}",
+        "RTC_PASSWORD": "${input:RTC_PASSWORD}",
+        "ELM_CCM_APPSTRING": "ccm",
+        "RTC_VERIFY_SSL": "false"
+        }
+    },
+    "ccm-docker-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "-e",
+        "RTC_SERVER_URL",
+        "-e",
+        "RTC_USERNAME",
+        "-e",
+        "RTC_PASSWORD",
+        "-e",
+        "RTC_VERIFY_SSL",
+        "-e",
+        "ELM_CCM_APPSTRING",
+        "-e",
+        "HTTP_PROXY",
+        "-e",
+        "HTTPS_PROXY",
+        "-e",
+        "NO_PROXY",
+        "-e",
+        "http_proxy",
+        "-e",
+        "https_proxy",
+        "-e",
+        "no_proxy",
+        "-e",
+        "TRANSPORT",
+        "-e",
+        "HOST",
+        "-e",
+        "HOST_PORT",
+        "artifactory.boschdevcloud.com/pmt-mcp-servers-docker-local/ccm-mcp-server:0.0.0"
+      ],
+      "env": {
+        "RTC_SERVER_URL": "<RTC_SERVER_URL>",
+        "RTC_USERNAME": "${input:RTC_USERNAME}",
+        "RTC_PASSWORD": "${input:RTC_PASSWORD}",
+        "RTC_VERIFY_SSL": "false",
+        "HTTP_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "HTTPS_PROXY": "http://rb-proxy-de.bosch.com:8080",
+        "http_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "https_proxy": "http://rb-proxy-de.bosch.com:8080",
+        "TRANSPORT": "<TRANSPORT>",
+        "HOST": "<HOST>",
+        "HOST_PORT": "<HOST_PORT>"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "RTC_PASSWORD",
+      "description": "RTC Password",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "RTC_USERNAME",
+      "description": "RTC Username",
+      "password": false
+    }
+  ]
+}
