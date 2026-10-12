@@ -38,6 +38,13 @@ build/
 .DS_Store
 Thumbs.db
 
+# Local docs / issue data (may contain internal material)
+core/docs/
+Issue_docs/
+
+# Machine-specific MCP config (use .mcp.json.example as template)
+.mcp.json
+
 # Credentials
 *.env
 .credentials/

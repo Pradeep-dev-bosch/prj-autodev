@@ -1,6 +1,6 @@
 ---
 name: ComponentSetup
-model: Claude Sonnet 4.5
+model: Claude Sonnet 5.5
 argument-hint: "Type 'start' to begin component registration"
 description: >
   Interactive setup wizard for registering an Android IVI software component with Autodev.

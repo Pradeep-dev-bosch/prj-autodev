@@ -1,6 +1,6 @@
 ---
 name: Autodev
-model: Claude Sonnet 4.5
+model: Claude Sonnet 5.5
 argument-hint: Enter the JIRA issue key (e.g., PROJ-1234)
 description: >
   Orchestrator for the Autodev pipeline. Accepts a JIRA issue key from the
