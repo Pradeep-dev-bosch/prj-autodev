@@ -293,6 +293,7 @@ BugAnalyst is tuned to recognise the following Android IVI bug patterns:
 | Component | Responsibility |
 |-----------|---------------|
 | **ComponentSetup** | **Chat wizard for registering IVI components** — collects layer flow, workspace paths, AIDL/HIDL interfaces, logcat tags; validates workspace paths; writes `core/docs/components/<slug>/` markdown files |
+| **TriageAgent** | **Standalone CCS2 triage** — given a JIRA key, runs `core/triage/triage_cli.py` on ticket text + logs, identifies SW Component and Sub-Delivery with evidence/confidence, and (only after explicit human approval) updates both fields and posts an evidence comment; uses `core/triage/knowledge/`, no ComponentSetup needed |
 | **InternalQualityCheckerAgent** | **JIRA ticket quality validation (Step 0)** — validates 24 criteria (attachments, test setup table, description sections, spec links, basic fields); labels as IQC_Pass/IQC_Fail; **stops pipeline if validation fails**; `user-invocable: false` (internal-only, orchestrator access only); supports single-ticket mode (Autodev) and batch mode (standalone) |
 | JIRA MCP | Issue retrieval, status updates, comment posting, label management |
 | SharePoint MCP | SDD, AIDL API specs, HMI design docs, component info sheets |

@@ -35,6 +35,7 @@ This guide was produced by directly inspecting the repository contents at `C:\Us
 | **FixGenerator** | Custom agent, not user-invocable, produces fix plan, applies code, pushes to Gerrit | `.github/agents/FixGenerator.agent.md` |
 | **KGUpdater** | Custom agent — **planned feature, disabled** (no knowledge-graph MCP server deployed) | `.github/agents/KGUpdater.agent.md` |
 | **ComponentSetup** | Custom agent, user-invocable, one-time-per-component registration wizard | `.github/agents/ComponentSetup.agent.md` |
+| **TriageAgent** | Custom agent, user-invocable, standalone: classifies a JIRA issue's SW Component and Sub-Delivery from ticket text and logs using `core/triage/` (no source search, no ComponentSetup); every JIRA write needs human approval | `.github/agents/TriageAgent.agent.md`, `core/triage/README.md` |
 | **Documentation Agent** (this guide's author) | Custom agent, user-invocable, produces workspace-verified documentation | `.github/agents/Documentation.agent.md` |
 | **jira-python-mcp-server** | MCP server — JIRA REST integration | `.mcp.json`, `pmt-mcp-servers-main/src/jira/` |
 | **sharepoint** MCP server | MCP server — SharePoint On-Premises integration (NTLM) | `.mcp.json`, `pmt-mcp-servers-main/src/sharepoint/sharepointonprem/` |
@@ -107,7 +108,7 @@ What the workspace *does* define for the CLI:
   ```
   dotenv -e C:\Users\EIB4KOR\Documents\prj_autodev-main\.env -- uv run --directory <server-dir> <script>.py
   ```
-- Custom agents under **`.github/agents/*.agent.md`** (`Autodev`, `BugAnalyst`, `ComponentSetup`, `Documentation`, `FixGenerator`, `InternalQualityCheckerAgent`, `KGUpdater`) that a Copilot CLI/Copilot Chat client can discover and invoke by name.
+- Custom agents under **`.github/agents/*.agent.md`** (`Autodev`, `BugAnalyst`, `ComponentSetup`, `Documentation`, `FixGenerator`, `InternalQualityCheckerAgent`, `KGUpdater`, `TriageAgent`) that a Copilot CLI/Copilot Chat client can discover and invoke by name.
 - A hooks configuration at **`.github/hooks/approval-policy.json`** wiring a `preToolUse` hook (`scripts/mcp-approval-gate.ps1` / `.sh`) that forces a human-approval prompt before the tools `jira-python-mcp-server-add_issue_comment`, `jira-python-mcp-server-transition_issue`, and `gerrit-push_to_gerrit` are executed — this is enforced regardless of what the agent instructions say.
 
 Only run commands that can be verified. To use this project with GitHub Copilot CLI:
@@ -244,6 +245,7 @@ Agents are defined as Markdown files with YAML frontmatter under `.github/agents
 |---|---|---|
 | `Autodev` | not set to false → user-invocable | Entry point; `argument-hint: Enter the JIRA issue key (e.g., PROJ-1234)` |
 | `ComponentSetup` | not set to false → user-invocable | `argument-hint: "Type 'start' to begin component registration"` |
+| `TriageAgent` | `user-invocable: true` | Invoke with a JIRA key; independent of Autodev pipeline; never auto-writes to JIRA |
 | `Documentation` (`documentation-agent`) | `user-invocable: true`, `disable-model-invocation: true` | Only invocable directly by name, never auto-selected |
 | `BugAnalyst` | `user-invocable: false` | Only reachable via Autodev's handoff |
 | `FixGenerator` | `user-invocable: false` | Only reachable via BugAnalyst's handoff |
@@ -282,7 +284,7 @@ Tools available to each agent are restricted per its frontmatter `tools:` list (
 | JIRA auth works | Use the `jira_request` tool (or `get_all_projects`) once the JIRA MCP server is connected in a client; a 401 indicates `JIRA_TOKEN`/`TRACKER_URL` are wrong. | `pmt-mcp-servers-main/src/jira/README.md` |
 | SharePoint auth works | Use `check_sharepoint_access`; confirm `SHAREPOINT_SITE_URL` (not `SHAREPOINT_URL`) is set — see Section 6 discrepancy. | `pmt-mcp-servers-main/src/sharepoint/sharepointonprem/README.md` |
 | Gerrit auth works | Use `list_gerrit_projects`; a 403/401 indicates `GERRIT_HTTP_PASSWORD` is wrong or expired. | `pmt-mcp-servers-main/src/gerrit/README.md` |
-| Agents are discovered | Confirm all seven `.agent.md` files are present: `ls .github/agents/*.agent.md` should list `Autodev`, `BugAnalyst`, `ComponentSetup`, `Documentation`, `FixGenerator`, `InternalQualityCheckerAgent`, `KGUpdater`. | `.github/agents/` |
+| Agents are discovered | Confirm all eight `.agent.md` files are present: `ls .github/agents/*.agent.md` should list `Autodev`, `BugAnalyst`, `ComponentSetup`, `Documentation`, `FixGenerator`, `InternalQualityCheckerAgent`, `KGUpdater`, `TriageAgent`. | `.github/agents/` |
 | Component registry available | `ls core/docs/components/` should show at least `README.md` and, in this workspace, `dtv/`. | `core/docs/components/` |
 | External services reachable | Not determinable from the current workspace — no network/proxy test scripts exist here; standard `ping`/`curl` against your JIRA/SharePoint/Gerrit hostnames can be used if your network allows it. | — |
 

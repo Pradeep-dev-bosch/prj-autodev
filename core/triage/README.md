@@ -2,6 +2,15 @@
 
 Users run the **TriageAgent** only. Maintainers build/refresh the knowledge once.
 
+## Using the TriageAgent
+Invoke `TriageAgent` (`.github/agents/TriageAgent.agent.md`) with a JIRA key. It:
+1. Fetches the ticket, comments and log attachments via the JIRA MCP server.
+2. Runs `triage_cli.py` on `core/workspace/triage/<KEY>/` (no LLM scoring, no source search).
+3. Presents decision, confidence, top-3 candidates and evidence.
+4. After explicit approval only, updates SW Component and Sub-Delivery and posts an evidence comment, then re-fetches to verify.
+
+Ticket/log content is treated as untrusted; raw log lines and secrets are never printed or posted. It is independent of ComponentSetup and does not hand off.
+
 ## Layout
 - `knowledge/component-map.json` – approved components, exact Sub-Delivery values, repos, keywords, thresholds (**fill in the template**).
 - `knowledge/generic-signals.json` – noisy tags to ignore.
