@@ -1,0 +1,619 @@
+{
+  "_readme": "Shared CCS2 component map. One entry per Sub-Delivery value (the Jira field being set). 'name' == exact Sub-Delivery value as supplied. 'repos'/'path_prefixes' (manifest paths) are NOT yet filled: needed for the source scan. Keywords are deliberately conservative substrings (lowercase compare) with weight 1.",
+  "thresholds": {
+    "high": 0.6,
+    "review": 0.3,
+    "min_distinct_evidence": 2
+  },
+  "components": [
+    {
+      "name": "ccs2_bringup",
+      "sub_delivery": "ccs2_bringup",
+      "sw_components": [
+        "FO_Bringup"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "bringup",
+        "bring-up"
+      ]
+    },
+    {
+      "name": "ccs2_HW",
+      "sub_delivery": "ccs2_HW",
+      "sw_components": [
+        "Hw-General"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": []
+    },
+    {
+      "name": "neo_speech",
+      "sub_delivery": "neo_speech",
+      "sw_components": [
+        "SW_Alexa",
+        "SW_SPEECH"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "alexa",
+        "speech",
+        "googlevr",
+        "voice"
+      ]
+    },
+    {
+      "name": "ccs2_Architecture",
+      "sub_delivery": "ccs2_Architecture",
+      "sw_components": [
+        "SW_Architecture"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "selinux",
+        "avc: denied",
+        "boot performance"
+      ]
+    },
+    {
+      "name": "ccs2_audio",
+      "sub_delivery": "ccs2_audio",
+      "sw_components": [
+        "SW_AUDIO"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "audio"
+      ]
+    },
+    {
+      "name": "ccs2_configuration",
+      "sub_delivery": "ccs2_configuration",
+      "sw_components": [
+        "SW_Config_mgr"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "configuration",
+        "config mgr"
+      ]
+    },
+    {
+      "name": "neo_soc2_debug",
+      "sub_delivery": "neo_soc2_debug",
+      "sw_components": [
+        "SW_debug_trace"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "debug trace"
+      ]
+    },
+    {
+      "name": "CCS2_diagnosis",
+      "sub_delivery": "CCS2_diagnosis",
+      "sw_components": [
+        "SW_Diagnostic"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "diag",
+        "dtc",
+        "uds"
+      ]
+    },
+    {
+      "name": "neo_xfunc_CAN",
+      "sub_delivery": "neo_xfunc_CAN",
+      "sw_components": [
+        "SW_DriveAssist"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "can signal",
+        "can bus",
+        "hvac",
+        "preconditioning",
+        "energy usage",
+        "charging",
+        "vehicle speed"
+      ]
+    },
+    {
+      "name": "CCS2_etcvics",
+      "sub_delivery": "CCS2_etcvics",
+      "sw_components": [
+        "SW_ETCVICS"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "vics"
+      ]
+    },
+    {
+      "name": "ccs2_MPLAY",
+      "sub_delivery": "ccs2_MPLAY",
+      "sw_components": [
+        "SW_Infotainment"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "usb msc",
+        "mtp",
+        "bt-audio",
+        "ipod",
+        "media player"
+      ]
+    },
+    {
+      "name": "neo_soc2_displaytouch",
+      "sub_delivery": "neo_soc2_displaytouch",
+      "sw_components": [
+        "SW_INPUT"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "gpu",
+        "videoin",
+        "display",
+        "touch",
+        "hw key",
+        "key press"
+      ]
+    },
+    {
+      "name": "neo_xfunc_meter",
+      "sub_delivery": "neo_xfunc_meter",
+      "sw_components": [
+        "SW_meter"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "cluster",
+        "meter"
+      ]
+    },
+    {
+      "name": "ccs2_navigation",
+      "sub_delivery": "ccs2_navigation",
+      "sw_components": [
+        "SW_navigation"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "navigation",
+        "gps"
+      ]
+    },
+    {
+      "name": "neo_soc2_base",
+      "sub_delivery": "neo_soc2_base",
+      "sw_components": [
+        "SW_networking"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "avb",
+        "ethernet",
+        "iSoC"
+      ]
+    },
+    {
+      "name": "ccs2_FOTA",
+      "sub_delivery": "ccs2_FOTA",
+      "sw_components": [
+        "SW_OTAS"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "fota"
+      ]
+    },
+    {
+      "name": "ccs2_welcomesequence",
+      "sub_delivery": "ccs2_welcomesequence",
+      "sw_components": [
+        "SW_ParkAssist"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "boot animation",
+        "welcome sequence"
+      ]
+    },
+    {
+      "name": "neo_soc2_ParkAssist",
+      "sub_delivery": "neo_soc2_ParkAssist",
+      "sw_components": [
+        "SW_PARKASSIST"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "avm",
+        "avmfap",
+        "rvc",
+        "upafkp",
+        "park assist"
+      ]
+    },
+    {
+      "name": "ccs2_user_management",
+      "sub_delivery": "ccs2_user_management",
+      "sw_components": [
+        "SW_PERSONALIZATION"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "user switch",
+        "userprofile",
+        "user profile"
+      ]
+    },
+    {
+      "name": "CCS2_BT_WIFI",
+      "sub_delivery": "CCS2_BT_WIFI",
+      "sw_components": [
+        "SW_PHONE",
+        "SW_WIFI"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "phone",
+        "bluetooth",
+        "wifi",
+        "wi-fi"
+      ]
+    },
+    {
+      "name": "ccs2_android",
+      "sub_delivery": "ccs2_android",
+      "sw_components": [
+        "SW_RESET",
+        "SW_xTs"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "java crash",
+        "native crash",
+        "tombstone",
+        "cts",
+        "vts",
+        "xts"
+      ]
+    },
+    {
+      "name": "ccs2_suspend",
+      "sub_delivery": "ccs2_suspend",
+      "sw_components": [
+        "SW_S2D"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "s2d",
+        "cold start",
+        "hot start",
+        "suspend"
+      ]
+    },
+    {
+      "name": "ccs2_security",
+      "sub_delivery": "ccs2_security",
+      "sw_components": [
+        "SW_SECURITY"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "antitheft",
+        "anti-theft"
+      ]
+    },
+    {
+      "name": "ccs2_smartphone_projection",
+      "sub_delivery": "ccs2_smartphone_projection",
+      "sw_components": [
+        "SW_SmartPhone"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "carplay",
+        "android auto",
+        "projection"
+      ]
+    },
+    {
+      "name": "neo_xfunc_lcm",
+      "sub_delivery": "neo_xfunc_lcm",
+      "sw_components": [
+        "SW_SPM"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "lcm",
+        "power management"
+      ]
+    },
+    {
+      "name": "ccs2_sw_update",
+      "sub_delivery": "ccs2_sw_update",
+      "sw_components": [
+        "SW_SWUPDATE"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "flashing",
+        "usb update",
+        "recovery mode",
+        "aurix update"
+      ]
+    },
+    {
+      "name": "neo_soc2_Telematics",
+      "sub_delivery": "neo_soc2_Telematics",
+      "sw_components": [
+        "SW_Telematic"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "telematics",
+        "ivc"
+      ]
+    },
+    {
+      "name": "CCS2_reception_AM_FM_DAB",
+      "sub_delivery": "CCS2_reception_AM_FM_DAB",
+      "sw_components": [
+        "SW_Tuner_AMFM"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "am/fm",
+        "dab"
+      ]
+    },
+    {
+      "name": "CCS2_reception_DTV",
+      "sub_delivery": "CCS2_reception_DTV",
+      "sw_components": [
+        "SW_Tuner_DTV"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "dtv"
+      ]
+    },
+    {
+      "name": "CCS2_HMI_SXM",
+      "sub_delivery": "CCS2_HMI_SXM",
+      "sw_components": [
+        "SW_Tuner_SXM"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "sxm"
+      ]
+    },
+    {
+      "name": "CCS2_reception_SXM",
+      "sub_delivery": "CCS2_reception_SXM",
+      "sw_components": [
+        "SW_Tuner_SXM"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "sxm"
+      ]
+    },
+    {
+      "name": "ccs2_sensors",
+      "sub_delivery": "ccs2_sensors",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "gnss"
+      ]
+    },
+    {
+      "name": "neo_autosar",
+      "sub_delivery": "neo_autosar",
+      "sw_components": [
+        "SW_NETWORKING"
+      ],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "aurix",
+        "autosar"
+      ]
+    },
+    {
+      "name": "neo_LBS_connectedHorizon",
+      "sub_delivery": "neo_LBS_connectedHorizon",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "connected horizon"
+      ]
+    },
+    {
+      "name": "Neo_LBS_positioning",
+      "sub_delivery": "Neo_LBS_positioning",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "positioning",
+        "location based"
+      ]
+    },
+    {
+      "name": "neo_soc1",
+      "sub_delivery": "neo_soc1",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "bootloader",
+        "bsp",
+        "soc supervision"
+      ]
+    },
+    {
+      "name": "neo_xfunc_base",
+      "sub_delivery": "neo_xfunc_base",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": [
+        "inter-node-communication",
+        "firewall",
+        "hardening",
+        "fact tool"
+      ]
+    },
+    {
+      "name": "System test",
+      "sub_delivery": "System test",
+      "sw_components": [],
+      "layer": null,
+      "repos": [],
+      "path_prefixes": [],
+      "keywords": []
+    },
+    {
+      "name": "Nissan_XM8",
+      "sub_delivery": "Nissan_XM8",
+      "sw_components": [],
+      "layer": "HMI / Application",
+      "repos": [],
+      "path_prefixes": [],
+      "pkg_prefixes": [
+        "jp.co.nissan.hmi"
+      ],
+      "keywords": [
+        "hmi",
+        "screen is displayed",
+        "home screen",
+        "back stack",
+        "sk_back",
+        "sk_all",
+        "all settings",
+        "ui "
+      ],
+      "rule": "Any issue identified as HMI/UI is routed to Nissan_XM8 (SW Component left unchanged)."
+    }
+  ],
+  "unassigned_topics": [
+    {
+      "sw_component": "Mechanic",
+      "topic": "",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "PO_CommonTestSw",
+      "topic": "",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "Production-general",
+      "topic": "",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "SW_ADASIS",
+      "topic": "",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "SW_AGW",
+      "topic": "",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "SW_SUM",
+      "topic": "system usability monitor",
+      "note": "no Sub-Delivery in mapping"
+    },
+    {
+      "sw_component": "",
+      "topic": "Bosch MICOM",
+      "note": "no Sub-Delivery in mapping"
+    }
+  ],
+  "needs_confirmation": [
+    {
+      "sub_delivery": "CCS2_Recieption_DTV",
+      "sw_component": "FO_TUNER-TV",
+      "note": "row 49; spelling 'Recieption' differs from CCS2_reception_DTV (row 37); confirm exact Jira value. Not used for classification."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "_readme": "Signals that appear in many components and must not drive classification. 'max_components': signals indexed to more components than this are ignored.",
+  "max_components": 4,
+  "ignore": [
+    "AndroidRuntime", "System.err", "System", "libc", "DEBUG", "Binder", "BinderProxy",
+    "ActivityManager", "WindowManager", "chatty", "zygote", "zygote64", "system_server",
+    "StrictMode", "art", "dex2oat", "linker", "Looper", "Handler", "main"
+  ]
+}

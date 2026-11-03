@@ -14,6 +14,8 @@ tools:
   - view
   - glob
   - grep
+  - create
+  - edit
   - jira-python-mcp-server/*
   # TODO: KG feature — enable when bug-knowledge-graph MCP server is deployed
   # - bug-knowledge-graph/query_similar_issues

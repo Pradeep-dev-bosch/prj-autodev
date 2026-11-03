@@ -1050,6 +1050,125 @@ def set_issue_reporter(issue_key: str, reporter: str) -> dict:
 
 
 @mcp.tool()
+def update_issue_components(
+    issue_key: str, add: list[str] | None = None, remove: list[str] | None = None
+) -> dict:
+    """Add and/or remove components on an issue in one update (e.g. replace SW_UNKNOWN).
+
+    Added names must exist in the project's components. Removing a name that is not on the
+    issue is ignored. The result must keep at least one component or the call is rejected.
+
+    Args:
+        issue_key: Jira issue key
+        add: component names to add
+        remove: component names to remove
+
+    Returns:
+        { issue, operation, before_components, after_components, added, removed }
+    """
+    add, remove = add or [], remove or []
+    if not add and not remove:
+        raise ValueError("Provide components to add and/or remove.")
+    issue_data = jira.issue(issue_key)
+    fields_data = (issue_data or {}).get("fields", {}) or {}
+    project_key = (fields_data.get("project") or {}).get("key")
+    if not project_key:
+        raise RuntimeError(f"Could not determine project key for {issue_key}.")
+    allowed = {
+        c["name"]: c
+        for c in (jira.get_project_components(project_key) or [])
+        if isinstance(c, dict) and c.get("name")
+    }
+    unknown = [n for n in add if n not in allowed]
+    if unknown:
+        raise ValueError(
+            "Unknown component(s): "
+            + ", ".join(unknown)
+            + ". Available: "
+            + ", ".join(sorted(allowed))
+        )
+    before = [c["name"] for c in fields_data.get("components", []) or [] if c.get("name")]
+    after = [n for n in before if n not in remove]
+    added = [n for n in add if n not in after]
+    after += added
+    removed = [n for n in before if n in remove]
+    if not after:
+        raise ValueError("Update would leave the issue with no components; rejected.")
+    payload = [
+        {"id": allowed[n]["id"]} if n in allowed and allowed[n].get("id") else {"name": n}
+        for n in after
+    ]
+    try:
+        jira.update_issue_field(issue_key, {"components": payload})
+    except Exception as e:
+        raise RuntimeError(f"Failed to update components on {issue_key}: {e}")
+    return {
+        "issue": issue_key,
+        "operation": "update_issue_components",
+        "before_components": before,
+        "after_components": after,
+        "added": added,
+        "removed": removed,
+    }
+
+
+@mcp.tool()
+def set_issue_custom_field(issue_key: str, field_id: str, value: str) -> dict:
+    """Set a single-value custom field (e.g. Sub-Delivery) with validation.
+
+    The field must be editable for the issue (editmeta). If the field defines allowed
+    values, `value` must match one exactly (by value or name); the matching option id is
+    sent. Plain string fields are set as text. Other field types are rejected.
+
+    Args:
+        issue_key: Jira issue key
+        field_id: custom field id, e.g. 'customfield_12345'
+        value: exact value to set
+
+    Returns:
+        { issue, operation, field_id, before, after }
+    """
+    if not re.fullmatch(r"customfield_\d+", field_id or ""):
+        raise ValueError("field_id must look like 'customfield_<number>'.")
+    if not value or not value.strip():
+        raise ValueError("value must be non-empty.")
+    editmeta = jira.get(f"/rest/api/2/issue/{issue_key}/editmeta")
+    meta = ((editmeta or {}).get("fields") or {}).get(field_id)
+    if not meta:
+        raise RuntimeError(f"{field_id} is not editable for {issue_key} (not on edit screen or no permission).")
+    allowed = meta.get("allowedValues")
+    if allowed:
+        match = next(
+            (a for a in allowed if value in (a.get("value"), a.get("name"))), None
+        )
+        if not match:
+            names = [a.get("value") or a.get("name") for a in allowed]
+            raise ValueError(f"'{value}' is not an allowed value. Allowed: {names}")
+        payload: Any = {"id": match["id"]} if match.get("id") else {"value": value}
+    elif (meta.get("schema") or {}).get("type") == "string":
+        payload = value
+    else:
+        raise ValueError(f"Unsupported field type for {field_id}: {meta.get('schema')}")
+
+    def _read() -> Any:
+        v = ((jira.issue(issue_key) or {}).get("fields") or {}).get(field_id)
+        return (v.get("value") or v.get("name")) if isinstance(v, dict) else v
+
+    before = _read()
+    try:
+        jira.update_issue_field(issue_key, {field_id: payload})
+    except Exception as e:
+        raise RuntimeError(f"Failed to set {field_id} on {issue_key}: {e}")
+    return {
+        "issue": issue_key,
+        "operation": "set_issue_custom_field",
+        "field_id": field_id,
+        "before": before,
+        "after": _read(),
+    }
+
+
+@mcp.tool()
 def issue_editable_fields(issue_key: str) -> dict:
     """Retrieve the editmeta for an issue and list editable fields.
 

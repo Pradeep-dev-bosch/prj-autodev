@@ -7,9 +7,17 @@ $ErrorActionPreference = "Stop"
 # Protected tool names (exact match required)
 # ---------------------------------------------------------------------------
 $ProtectedTools = @(
-    "jira-python-mcp-server-add_issue_comment"
-    "jira-python-mcp-server-transition_issue"
-    "gerrit-push_to_gerrit"
+    "add_issue_comment", "add_issue_components", "update_issue_components", "set_issue_custom_field",
+    "add_watcher", "add_web_link_to_issue", "add_worklog_entry", "assign_issue",
+    "bulk_add_collaboration_links", "bulk_add_comments", "bulk_transition_issues",
+    "clone_issue", "create_collaboration_link", "create_filter", "create_issue",
+    "delete_filter", "delete_issue_comment", "link_epic_to_issue", "link_issues",
+    "modify_issue_labels", "modify_issue_type", "remove_vote", "remove_watcher",
+    "remove_web_link", "set_due_date", "set_issue_acceptance_criteria",
+    "set_issue_description", "set_issue_reporter", "set_issue_summary",
+    "transition_issue", "unlink_issues", "update_collaboration_link", "update_filter",
+    "update_issue_comment", "update_time_tracking", "upload_attachment", "vote_for_issue",
+    "push_to_gerrit"
 )
 
 # ---------------------------------------------------------------------------
@@ -40,7 +48,10 @@ if (-not $ToolName) {
 # ---------------------------------------------------------------------------
 # Check against protected list
 # ---------------------------------------------------------------------------
-if ($ProtectedTools -contains $ToolName) {
+# Normalise: "jira-python-mcp-server-add_issue_comment" / ".../add_issue_comment" -> bare name
+$BareName = $ToolName -replace '^.*[-/]', ''
+
+if ($ProtectedTools -contains $BareName) {
     Write-Output '{"permissionDecision":"ask"}'
 } else {
     Write-Output '{"permissionDecision":"allow"}'
